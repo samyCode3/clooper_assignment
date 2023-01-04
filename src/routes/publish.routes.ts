@@ -7,7 +7,7 @@ const router: Application = express()
 router.post('/createProperty/:userId', createPublish)
 router.post('/request/:userId', requestApproval)
 router.post('/publish/:publishId', UserpublishProperty)
-router.get('/searchProperty', SearchMethod )
+router.get('/search', SearchMethod )
 router.put('/update/:publishedId', UpdatePublish)
 router.delete('/delete/:publishedId', DeletePublish)
 export default router

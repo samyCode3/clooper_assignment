@@ -73,7 +73,7 @@ export const  UserpublishProperty = async (
        }
      }
     } catch (error) {
-      
+      if (error) return res.status(500).json({ ok: false, msg: error });
     }
    
 }
@@ -83,15 +83,19 @@ export const SearchMethod = async (
   res: Response,
   next: NextFunction
 ): Promise<Response | void> => {
-  const search = req.body;
-  const searchFor = await publishModel.find({ address: search });
-  if (!search || !searchFor) {
-    return res
-      .status(404)
-      .json({ ok: false, msg: "Can't find what you are looking for" });
-  } else {
-    return res.status(200).json({ ok: true, searchFor });
+  try {
+    const searchFor = await publishModel.find({ where : { address : req.body.address}});
+    if (!searchFor) {
+      return res
+        .status(404)
+        .json({ ok: false, msg: "Can't find what you are looking for" });
+    } else {
+      return res.status(200).json({ ok: true, result : searchFor });
+    }
+  } catch (error) {
+    if (error) return res.status(500).json({ ok: false, msg: error });
   }
+
 };
 
 // Request for Approval From Admin
