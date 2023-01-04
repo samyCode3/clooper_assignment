@@ -63,7 +63,7 @@ export const  UserpublishProperty = async (
         const subject = 'Property created By User'
         const text = 'Happy coding'
         const html = `
-      Information from ${req.body.email}, Created some properities requesting for approver ${req.body} `
+      Information from ${req.body.email}, Created some properities requesting for approver ${updateToisPublished} `
       //Send Email
       if(sendTime) {
         const send = await email.sendMail({to, subject, text, html})
